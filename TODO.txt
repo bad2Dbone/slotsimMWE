@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 TODO for Slotsim GUI: 
 (in order or priority)
 
@@ -46,3 +47,53 @@ X integration of react-json-view|integrated and later removed, hence not useful
 + 3 tabs main window for "General",  "Single Play" and "Simulation"
 + Help Menu, Open Devtools
 + Help Menu, About Dialog box popup with version 
+=======
+TODO for Slotsim GUI: 
+(in order or priority)
+
+
+*********DONE************************
+x slotsim logo in simulation excel file (logo_excel.png in \tools\excelgen and \client\style\images)
++ About window should be real window instead of dialog box|some preparation in progress...
++ more consecutive simulations based on input (comma separated: 10000,10000,10000) Vesna
++ Spin events in single play cannot dissappear after going to console tab
++ merge simulation excel files after generation
++ generate excel file from simulation
++ ipc for communication with child process:
++ How to rename repository name? 
+X integration of react-json-view|integrated and later removed, hence not useful
++ General: make folder path for working directory + example: D:\Gameart\Slotide
+
++ Single play: Inject Randoms: TEXTFIELD
+++ Single play, simulation: button SPIN|what value shoud it set?
+    + spawns a child process (e.g. node test.js)
+    + first parent sends "start" signal
+    + test.js does something then returns some value to the parent (testing progress value return)
+    + spawn child --> parent sends start to child --> child finishes and returns some result
+    + child writes log.txt file and let's see if refresh on the console works!|done in simulation only
+
++ Simulaton add debugger checkbox
++ Simulation Number of paylines instead Pay line
++ Simulation: Inject Randoms: TEXTFIELD
++ Simulation: electron-store onDidChange function
+++ Simulation: progress indicator|where is it gonna get the value from? --> child process when running.
+++ Simulation: RTP return to player + Field read only|where is it gonna get the value from? child
+++ Simulation: STD standard deviaton  + Field read only|where is it gonna get the value from? child
+++ Simulation: RUN button|what value shoud it set? also start another child that returns values above.
+++ Simulation: STOP button|what value shoud it set? none for now. child cannot be interrupted! - Button ready anyway
++ Simulation: Thicker progress bar and percentage indication| I dont feel like the bar is not thick enough, percentage is there
+
++ Console: make it resizable, (dynamic size)
++ Console: clear button - delete log file content
++ Console: refresh button
++ "General" Tab will contain buttons "Start Game Server", "Stop Game Server"
++ implement electron-store as global persistent data store
++ Console window that writes content also to file - Lazylog. 
++ "General" Tab will contain button "Select file", which opens select window and returns reference to selected file.
++ Simulation tab need options: number of games #, payline #, credit per line #, threads #, verbose BOOL, generate excel BOOL
++X How to do "Select File" Dialog box in electron? We need to select file and use it!|Dialog logs the path for now,
+ we can use that somehow...
++ 3 tabs main window for "General",  "Single Play" and "Simulation"
++ Help Menu, Open Devtools
++ Help Menu, About Dialog box popup with version 
+>>>>>>> 70d52f5d17befcd08d2bb2b925fe65f5bc8a1f73
