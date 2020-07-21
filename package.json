@@ -1,0 +1,60 @@
+{
+  "name": "slotsim",
+  "description": "Math testing for slot games",
+  "author": "Enerco",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.10.1",
+    "cross-env": "6.0.2",
+    "electron-is-dev": "1.2.0",
+    "electron-log": "4.2.1",
+    "electron-router": "^0.4.4",
+    "electron-store-atomically": "^0.0.2",
+    "node-ipc": "^9.1.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-lazylog": "^4.5.2",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "5.2.0",
+    "electron": "9.0.2",
+    "electron-builder": "^22.7.0",
+    "react-scripts": "3.4.1",
+    "wait-on": "5.0.1"
+  },
+  "build": {
+    "publish": {
+      "provider": "github"
+    },
+    "win": {
+      "icon": "./public/icon256.ico"
+    }
+  },
+  "main": "public/electron.js",
+  "homepage": "./",
+  "scripts": {
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test --env=jsdom",
+    "react-eject": "react-scripts eject",
+    "electron-build": "electron-builder",
+    "release": "yarn react-build && electron-builder --publish=always",
+    "build": "yarn react-build && yarn electron-build",
+    "start": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "debug": "concurrently \"cross-env BROWSER=none yarn react-start\" \"wait-on http://localhost:3000 && electron . --inspect=5858 \""
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
