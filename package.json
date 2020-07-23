@@ -13,9 +13,7 @@
     "electron-store-atomically": "^0.0.2",
     "node-ipc": "^9.1.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-lazylog": "^4.5.2",
-    "winston": "^3.2.1"
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "concurrently": "5.2.0",
