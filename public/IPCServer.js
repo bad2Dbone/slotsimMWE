@@ -78,7 +78,7 @@ class IPCServer {
                 key: "injRandoms"
                 },
             context: "settings"*/
-            router.on("store.get", async (req) => {
+            router.on("store.get", async (evt, req) => {
                 
                 var data = {
                     to: req.from,

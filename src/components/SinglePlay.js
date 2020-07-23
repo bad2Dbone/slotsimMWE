@@ -62,37 +62,21 @@ class SinglePlay extends React.Component {
                 this.router.send("store.get", req)
             });
 
-            // send request for start button status
-            var req = {
-                from: "singlePlay",
-                key: {
-                    section: "singlePlay",
-                    key: "running"
-                },
-                context: "simRunning"
-            }
-            this.router.send("store.get", req)
-
-            // register handler for "SPDone" events
-            this.refreshStates();
-
             this.router.on("store.data", this.refreshSettings);
         }
-
-
         this._singlePlayMounted = true;
-        console.log("Mount events: " + this.router._eventsCount);
-
     };
 
     componentWillUnmount() {
         
         this._singlePlayMounted = false; 
-        this.router.removeAllListeners();
-        console.log("Unmount events: " + this.router._eventsCount);
+        //here you can select between removal methods:
+        //1: remove all listeners
+        //this.router.removeAllListeners();
 
+        //2:removeListeners in loop from router._events information
         //remove listeners with router.removeListener (evt, handler, ctx)
-       /* for (var event in this.router._events) {
+        for (var event in this.router._events) {
             if (this.router._events[event].constructor === Array ) { // case when there are multiple listeners
                 
                 for (var listener of this.router._events[event]) {
@@ -104,24 +88,18 @@ class SinglePlay extends React.Component {
                 this.router.removeListener(event, this.router._events[event].fn, this.router._events[event].context)
                 console.log("Removing object: " + event);
             }
+        }
 
-        }*/
+        //3: removeListener directly
+        //this.router.removeListener("store.data", this.refreshSettings);
 
+        //print out the router variable:
+        console.log("router variable: ")
         console.log(this.router);
     }
 
-    //check if something in electron-store has changed
-    refreshStates = () => {
-        //running
-        this.router.on("SPDone", () => {
-            if (this._singlePlayMounted === true){
-                this.setState({spinDisabled: false});
-            };
-        });
-    };
-
-    // do all possible shit, when data received from store
-    refreshSettings = (data)  => {
+    // do all kind of shit, when data received from store
+    refreshSettings = (evt, data)  => {
         if (data.to === "singlePlay") {
             
             console.log("got SP data: " + data.context + ":" + JSON.stringify(data.key));
@@ -143,12 +121,6 @@ class SinglePlay extends React.Component {
                     this.spawnChild(data.value);
                     break;
 
-                case "spinEvents":
-                    if (this._singlePlayMounted === true){
-                        this.setState({spinEvents: data.value});
-                    };
-                    break;
-
                 default:
                     console.log("SinglePlay: data received, but no case was hit");
                     console.log(data);
@@ -162,7 +134,6 @@ class SinglePlay extends React.Component {
     render() {
 
         const { classes } = this.props;
-        //logger.log("render()");
 
         return (
             

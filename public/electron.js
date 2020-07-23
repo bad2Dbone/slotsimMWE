@@ -32,7 +32,7 @@ function createWindow() {
       nodeIntegration: true, 
       enableRemoteModule: true
     }, 
-    icon: path.join(__dirname, 'favicon.ico')
+    //icon: path.join(__dirname, 'favicon.ico')
   });
   
   // load content into window
