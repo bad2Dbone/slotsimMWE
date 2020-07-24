@@ -43,7 +43,7 @@ class General extends React.Component {
         this._generalMounted = true;
 
         //load initial data from store
-        /*Object.keys(this.state).forEach(element => {
+        Object.keys(this.state).forEach(element => {
             var req = {
                 from: "general",
                 key: {
@@ -53,10 +53,10 @@ class General extends React.Component {
                 context: "settings"
             }
             this.router.send("store.get", req)
-        });  */
+        });  
 
             //do shit, when data received from store
-            /*this.router.on("store.data", (data) => {
+            this.router.on("store.data", (data) => {
                 if (data.to === "general"){
                     switch(data.context){
     
@@ -71,11 +71,13 @@ class General extends React.Component {
                             break;
                     }
                 }
-            });*/
+            });
     };
 
     componentWillUnmount() {
         this._generalMounted = false;
+        // ToDo := Should probably be better to remove each listener individually, 
+        //  but that would require the listener to be a non anonymous function :)
         this.router.removeAllListeners();
 
         //remove listeners with router.removeListener (evt, handler, ctx)

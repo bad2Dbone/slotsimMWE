@@ -61,6 +61,18 @@ class SinglePlay extends React.Component {
                 }
                 this.router.send("store.get", req)
             });
+            var req = {
+                from: "singlePlay",
+                key: {
+                    section: "singlePlay",
+                    key: "running"
+                },
+                context: "simRunning"
+            }
+            this.router.send("store.get", req)
+
+            // register handler for "SPDone" events
+            this.refreshStates();
 
             this.router.on("store.data", this.refreshSettings);
         }
@@ -76,7 +88,7 @@ class SinglePlay extends React.Component {
 
         //2:removeListeners in loop from router._events information
         //remove listeners with router.removeListener (evt, handler, ctx)
-        for (var event in this.router._events) {
+        /*for (var event in this.router._events) {
             if (this.router._events[event].constructor === Array ) { // case when there are multiple listeners
                 
                 for (var listener of this.router._events[event]) {
@@ -88,18 +100,27 @@ class SinglePlay extends React.Component {
                 this.router.removeListener(event, this.router._events[event].fn, this.router._events[event].context)
                 console.log("Removing object: " + event);
             }
-        }
+        }*/
 
         //3: removeListener directly
-        //this.router.removeListener("store.data", this.refreshSettings);
+        this.router.removeListener("store.data", this.refreshSettings);
 
         //print out the router variable:
         console.log("router variable: ")
         console.log(this.router);
     }
 
+    refreshStates = ()  => {
+        //running
+        this.router.on("SPDone", () => {
+            if (this._singlePlayMounted === true){
+                this.setState({spinDisabled: false});
+            };
+        });
+    };
+
     // do all kind of shit, when data received from store
-    refreshSettings = (evt, data)  => {
+    refreshSettings = (data)  => {
         if (data.to === "singlePlay") {
             
             console.log("got SP data: " + data.context + ":" + JSON.stringify(data.key));

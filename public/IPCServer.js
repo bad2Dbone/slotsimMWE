@@ -7,6 +7,7 @@ const Store = require('electron-store-atomically');
 
 var Router = require('electron-router');
 var router = Router('IPCSERVER');
+var EventEmitter = require('eventemitter3')
 var tmpCounter = 0;
 
 class IPCServer {
@@ -78,8 +79,7 @@ class IPCServer {
                 key: "injRandoms"
                 },
             context: "settings"*/
-            router.on("store.get", async (evt, req) => {
-                
+            router.on("store.get", async (req) => {
                 var data = {
                     to: req.from,
                     key: {
